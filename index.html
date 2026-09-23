@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إلى جني ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Tahoma, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, #ffd6eb, transparent 35%),
+        radial-gradient(circle at bottom right, #d9c2ff, transparent 35%),
+        linear-gradient(135deg, #fff0f8, #eadcff);
+      color: #57234f;
+      overflow-x: hidden;
+    }
+
+    /* شاشة الباسورد */
+    #login {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+    }
+
+    .login-box {
+      width: min(420px, 100%);
+      padding: 40px 30px;
+      text-align: center;
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(15px);
+      border-radius: 30px;
+      box-shadow: 0 20px 60px rgba(126,63,115,.2);
+    }
+
+    .login-heart {
+      font-size: 60px;
+      animation: pulse 1.5s infinite;
+    }
+
+    .login-box h1 {
+      color: #b83280;
+      margin: 15px 0 10px;
+      font-size: 32px;
+    }
+
+    .login-box p {
+      color: #805477;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid #edb9d8;
+      border-radius: 50px;
+      outline: none;
+      text-align: center;
+      font-size: 18px;
+      color: #71315f;
+      background: #fff8fc;
+      margin-bottom: 15px;
+    }
+
+    input:focus {
+      border-color: #c95099;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      padding: 15px 28px;
+      border-radius: 50px;
+      font-size: 17px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(135deg, #d84c99, #8d5bd1);
+      box-shadow: 0 10px 25px rgba(156,70,145,.3);
+      transition: .3s;
+    }
+
+    button:hover {
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    #error {
+      display: none;
+      margin-top: 15px;
+      color: #c03975;
+      font-weight: bold;
+    }
+
+    /* الموقع */
+    #site {
+      display: none;
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      font-size: 22px;
+      animation: floatUp linear infinite;
+      opacity: .7;
+    }
+
+    .heart:nth-child(1) { left:5%; animation-duration:9s; }
+    .heart:nth-child(2) { left:18%; animation-duration:12s; animation-delay:2s; }
+    .heart:nth-child(3) { left:31%; animation-duration:10s; animation-delay:4s; }
+    .heart:nth-child(4) { left:45%; animation-duration:14s; animation-delay:1s; }
+    .heart:nth-child(5) { left:60%; animation-duration:11s; animation-delay:3s; }
+    .heart:nth-child(6) { left:74%; animation-duration:13s; animation-delay:5s; }
+    .heart:nth-child(7) { left:88%; animation-duration:10s; animation-delay:2s; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(.8);
+        opacity: 0;
+      }
+      15% { opacity: .8; }
+      100% {
+        transform: translateY(-115vh) scale(1.4) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes pulse {
+      0%,100% { transform:scale(1); }
+      50% { transform:scale(1.15); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: min(900px, 92%);
+      margin: auto;
+      padding: 40px 0;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .hero-heart {
+      font-size: 50px;
+      animation: pulse 1.5s infinite;
+      display: inline-block;
+    }
+
+    .hero h1 {
+      font-size: clamp(45px, 9vw, 75px);
+      color: #b83280;
+      margin-top: 10px;
+    }
+
+    .subtitle {
+      font-size: 19px;
+      color: #7d4676;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: rgba(255,255,255,.75);
+      backdrop-filter: blur(12px);
+      border-radius: 30px;
+      padding: 35px;
+      box-shadow: 0 20px 60px rgba(126,63,115,.16);
+    }
+
+    .message {
+      line-height: 2.15;
+      font-size: 19px;
+    }
+
+    .message p {
+      margin-bottom: 22px;
+    }
+
+    .highlight {
+      color: #c13c88;
+      font-weight: bold;
+    }
+
+    .love-box {
+      margin-top: 30px;
+      padding: 25px;
+      border-radius: 22px;
+      background: linear-gradient(135deg,#ffe1f1,#eee0ff);
+      text-align: center;
+      color: #9d3576;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .button-area {
+      text-align: center;
+      margin-top: 35px;
+    }
+
+    #secret {
+      display: none;
+      margin-top: 20px;
+      padding: 25px;
+      border-radius: 20px;
+      background: white;
+      color: #a52e78;
+      font-size: 21px;
+      line-height: 1.9;
+      animation: appear .8s ease;
+    }
+
+    @keyframes appear {
+      from { opacity:0; transform:translateY(15px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #8b5b83;
+    }
+
+    @media(max-width:600px) {
+      .card { padding: 23px 18px; }
+      .message {
+        font-size: 17px;
+        line-height: 2;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- شاشة الدخول -->
+  <section id="login">
+    <div class="login-box">
+      <div class="login-heart">💗</div>
+
+      <h1>رسالة خاصة لجني</h1>
+
+      <p>
+        الموقع ده مش هيفتح غير للشخص الصح ❤️
+      </p>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="اكتبي الباسورد 💕"
+        onkeydown="if(event.key==='Enter') checkPassword()"
+      >
+
+      <button onclick="checkPassword()">
+        افتحي الرسالة ❤️
+      </button>
+
+      <div id="error">
+        الباسورد غلط يا جني 🥺💗
+      </div>
+    </div>
+  </section>
+
+
+  <!-- الموقع الرومانسي -->
+  <section id="site">
+
+    <div class="hearts">
+      <div class="heart">💗</div>
+      <div class="heart">💜</div>
+      <div class="heart">💕</div>
+      <div class="heart">💖</div>
+      <div class="heart">💗</div>
+      <div class="heart">💜</div>
+      <div class="heart">💕</div>
+    </div>
+
+    <main class="container">
+
+      <div class="hero">
+        <div class="hero-heart">💗</div>
+
+        <h1>جني</h1>
+
+        <p class="subtitle">
+          إلى أجمل صدفة حصلتلي في حياتي ❤️
+        </p>
+      </div>
+
+      <div class="card">
+
+        <div class="message">
+
+          <p>
+            ينور عيني، <span class="highlight">بحبك أوي</span>،
+            ومعاكي في أي حاجة.
+            وكل سنة وإنتي قلبي وعيني وروحي وحياتي كلها. ❤️
+          </p>
+
+          <p>
+            يارب نفضل مع بعض في كل حاجة حلوة،
+            وتفضلي أحلى حاجة في حياتي يا روحي،
+            وتفضلي ضهري وسندي.
+          </p>
+
+          <p>
+            وبما إن عدى على حبنا سنة ونص تقريبًا،
+            عايز أقولك إني بحبك جدًا وبموت فيكي،
+            وإن إنتي أحلى حد قابلته في حياتي،
+            وأحلى صدفة حصلتلي في حياتي يا نور عيني. ❤️
+          </p>
+
+          <p>
+            وأنا بتأسفلك على أي مرة ضايقتك فيها
+            أو زعلتك مني، وحقك عليا يا نور عيني.
+            والله غبي عشان كنت بزعلِك إنتي بالذات،
+            مينفعش تزعلي يا جَنجونتي. 🥺❤️
+          </p>
+
+          <p>
+            وبحبك جدًا جدًا،
+            وكل سنة وإنتي في أي وقت عيدي يا قلبي.
+            وبجد إنتي أحسن وأحلى حد شوفته في حياتي،
+            ويخربيت حلاوتك يا بت 😂❤️ هاتي بوسة!
+          </p>
+
+          <p>
+            وربنا يخليني ليكي يا رب،
+            ونفضل سوا مع بعض،
+            وتفضلي أحلى وأجمل بنوتة في الدنيا
+            يا بنوتي يا عسولة. ❤️
+          </p>
+
+          <p>
+            وأشهدلك إنك كنتي ضهري وسندي
+            في الوحش قبل الحلو،
+            وإن إنتي أجدع حد قابلته.
+          </p>
+
+          <p>
+            وربنا يخليكي ليا يا رب،
+            ومتحرمش منك،
+            وتفضلي مبسوطة يا حبيبتي،
+            ومشوفش فيكي حاجة وحشة أبدًا يا بابا. ❤️
+          </p>
+
+          <p>
+            وبحبك، بحبك أوي أوي أوي أوي أوي
+            أوي أوي أوي أوي أوي أوي أوي،
+            والله العظيم. ❤️
+          </p>
+
+          <p>
+            ومتزعليش مني لو ضايقتك في أي مرة...
+          </p>
+
+        </div>
+
+        <div class="love-box">
+          حقك عليا يا جني ❤️<br>
+          بحبك يا قلبي 💗
+        </div>
+
+        <div class="button-area">
+
+          <button onclick="showSecret()">
+            اضغطي هنا يا جني 💗
+          </button>
+
+          <div id="secret">
+            كل سنة وإنتي معايا،<br>
+            وكل سنة وإنتي حبيبتي،<br>
+            ويا رب نفضل سوا دايمًا ❤️💜
+          </div>
+
+        </div>
+
+      </div>
+
+      <footer>
+        صُنع بكل الحب إلى جني 💗
+      </footer>
+
+    </main>
+  </section>
+
+
+  <script>
+    function checkPassword() {
+
+      const correctPassword = "2/9/2024";
+      const enteredPassword =
+        document.getElementById("password").value;
+
+      const login = document.getElementById("login");
+      const site = document.getElementById("site");
+      const error = document.getElementById("error");
+
+      if (enteredPassword === correctPassword) {
+
+        login.style.display = "none";
+        site.style.display = "block";
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+      } else {
+
+        error.style.display = "block";
+
+        document.getElementById("password").value = "";
+
+        setTimeout(() => {
+          error.style.display = "none";
+        }, 2500);
+      }
+    }
+
+    function showSecret() {
+
+      const secret = document.getElementById("secret");
+
+      if (secret.style.display === "block") {
+        secret.style.display = "none";
+      } else {
+        secret.style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
